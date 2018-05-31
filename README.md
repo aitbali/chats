@@ -1,5 +1,12 @@
 # README
 
+Contributeurs :
+
+
+Abdel Ait Bali
+Kevin Mainaud
+Larry Goldstein
+
 
 
   lien de production  https://shrouded-bastion-39294.herokuapp.com/
@@ -31,5 +38,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-# chats
-# chats
+PS : soyez indulgents on est au taquet sur le projet final ;-)
