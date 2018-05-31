@@ -1,0 +1,339 @@
+
+	<header class="header2">
+		<!-- Header desktop -->
+		<div class="container-menu-header-v2 p-t-26">
+			<div class="topbar2">
+				<div class="topbar-social">
+					<% if user_signed_in? %>							 
+									<%= link_to profil_path do%> <%= current_user.email%> <%end%>
+                    <% else%>
+					
+                    <%end%>
+				</div>
+
+				<!-- Logo2 -->
+				<p>                                        CAT CORNER </p>
+
+				<div class="topbar-child2">
+					<span class="topbar-email">
+					</span>
+
+					<% if user_signed_in? %>
+                        <%= link_to destroy_user_session_path, method: "delete"  do %>Logout<%end%>
+                    <% else%>
+                        <%= link_to "Connexion", new_user_session_path %>
+                        &nbsp
+                        <%= link_to "S'enregistrer", new_user_registration_path %>
+                    <%end%>
+					
+						
+					</a>
+
+					<span class="linedivide1"></span>
+
+					<div class="header-wrapicon2 m-r-13">
+						
+						<%= image_tag("icons/icon-header-01.png", :alt => "panier", :class => "header-icon1 js-show-header-dropdown")%>
+						<% if user_signed_in? && current_user.cart != nil %>
+							<span class="header-icons-noti"><%=current_user.cart.items.size%></span>
+						<%else%>
+							<span class="header-icons-noti">0</span>
+						<%end%>
+<!--  ######################################## -->
+<!-- Header cart noti -->
+<!--  ######################################## -->		
+
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+							<% if user_signed_in? && current_user.cart != nil %>
+								<% total = 0 %> 
+								<% current_user.cart.items.each do |item| %>
+									<li class="header-cart-item">
+										<div class="header-cart-item-img">
+										<%if item.image_url != nil %>
+													<%= image_tag('cats/' + item.image_url) %>  
+										<%else%>
+													<%= image_tag item.image%>
+										<%end%> 
+										</div>
+										<div class="header-cart-item-txt">
+											<a href="#" class="header-cart-item-name">
+												<%=item.title%>
+											</a>
+											<span class="header-cart-item-info">
+												<%=item.price%>€
+											</span>
+											<span>
+											<%= link_to remove_path(item), method: 'post' do %> Supprimer <%end%>
+											</span>
+										</div>
+									</li>
+									<% total += item.price%> 
+								<%end%>
+								
+
+							
+							<%else%>
+									<li class="header-cart-item">
+										<div class="header-cart-item-img">
+											
+										</div>
+
+										<div class="header-cart-item-txt">
+											<a href="#" class="header-cart-item-name">
+											VIDE
+											</a>
+
+											<span class="header-cart-item-info">
+												
+											</span>
+										</div>
+									</li>
+
+							<%end%>
+							</ul>
+						<% if user_signed_in? && current_user.cart != nil %>
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									
+									<%=link_to "Panier", cart_path, class:"flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4"%></a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<%= link_to "Check Out", new_cart_path, class: "flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" %>
+								</div>
+							</div>
+							<div class="header-cart-total">
+								<%= total %>€
+							</div>
+						<%end%>
+							
+
+						<div class="header-cart-total">
+								
+						</div>
+
+						<div class="header-cart-buttons">
+							<div class="header-cart-wrapbtn">
+									
+								
+							</div>
+							<div class="header-cart-wrapbtn">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+
+<!--  ######################################## -->
+<!-- Header cart noti -->
+<!--  ######################################## -->
+			<div class="wrap_header">
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<%=link_to "Accueil", root_path%>
+							</li>
+
+							
+						<% if user_signed_in? %>
+							<li>
+								<%=link_to "Panier", cart_path%>
+							</li>
+							<li>
+								<%=link_to "Création items admin", new_item_path%>
+							</li>
+							<li>
+								<%=link_to "Tous les items admin", items_path%>
+							</li>
+						<% end %>
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="<%root_path%>" class="logo-mobile">
+				<img src="images/icons/logo.png" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu">
+				<!-- Header Icon mobile -->
+				<div class="header-icons-mobile">
+					<a href="#" class="header-wrapicon1 dis-block">
+						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					</a>
+
+					<span class="linedivide2"></span>
+
+					<div class="header-wrapicon2">
+						<%= image_tag("icons/icon-header-02.png", :alt => "panier", :class => "header-icon1 js-show-header-dropdown")%>
+						<span class="header-icons-noti">0</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="images/item-cart-01.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											White Shirt With Pleat Detail Back
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $19.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="images/item-cart-02.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Converse All Star Hi Black Canvas
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $39.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="images/item-cart-03.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Nixon Porter Leather Watch In Tan
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $17.00
+										</span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-total">
+								Total: $75.00
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										View Cart
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Check Out
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+							Free shipping for standard order over $100
+						</span>
+					</li>
+
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<div class="topbar-child2-mobile">
+							<span class="topbar-email">
+								<% if user_signed_in? %>
+									<%= link_to destroy_user_session_path, method: "delete"  do %>Logout<%end%> 
+                    			<% else%>
+									<%= link_to "Log in", new_user_session_path %>
+									&nbsp
+									<%= link_to "Sign up", new_user_registration_path %>
+                    			<%end%>
+							</span>
+
+							
+						</div>
+					</li>
+
+					<li class="item-topbar-mobile p-l-10">
+						<div class="topbar-social-mobile">
+							<a href="#" class="topbar-social-item fa fa-facebook"></a>
+							<a href="#" class="topbar-social-item fa fa-instagram"></a>
+							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+						</div>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="<%root_path%>">Home</a>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+
+					
+
+					<li class="item-menu-mobile">
+						<a href="product.html">Sale</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="cart.html">Features</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="blog.html">Blog</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="about.html">About</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="contact.html">Contact</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
